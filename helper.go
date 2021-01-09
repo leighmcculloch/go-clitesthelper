@@ -32,7 +32,7 @@ func (h Helper) Main(args []string, stdin io.Reader, main MainFunc) (exitCode in
 		io.MultiWriter(&stdoutBuilder, &combinedBuilder),
 		io.MultiWriter(&stderrBuilder, &combinedBuilder),
 	)
-	h.TB.Log(strings.Join(args, "") + "\n" + strings.TrimSuffix(string(combinedBuilder.String()), "\n"))
+	h.TB.Log(strings.Join(args, " ") + "\n" + strings.TrimSuffix(string(combinedBuilder.String()), "\n"))
 	stdout = stdoutBuilder.String()
 	stderr = stderrBuilder.String()
 	return
