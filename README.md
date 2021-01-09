@@ -1,4 +1,7 @@
 # go-testcli
+
+[![Go Reference](https://pkg.go.dev/badge/4d63.com/testcli.svg)](https://pkg.go.dev/4d63.com/testcli)
+
 Go package containing helpers for testing CLIs.
 
 ## Usage
