@@ -49,7 +49,10 @@ func (h Helper) Exec(command string) (exitCode int, stdout, stderr string) {
 	cmd.Stderr = io.MultiWriter(&stderrBuilder, &combinedBuilder)
 	err := cmd.Run()
 	if err != nil {
-		h.TB.Fatalf("executing %q: %v", command, err)
+		if err, ok := err.(*exec.ExitError); ok {
+		} else {
+			h.TB.Fatalf("executing %q: %v", command, err)
+		}
 	}
 	h.TB.Log(command + "\n" + strings.TrimSuffix(string(combinedBuilder.String()), "\n"))
 	exitCode = cmd.ProcessState.ExitCode()
@@ -77,6 +80,15 @@ func (h Helper) MkdirTemp() string {
 	}
 	h.TB.Log("mktemp -d\n" + dir)
 	return dir
+}
+
+func (h Helper) Mkdir(path string) {
+	h.TB.Helper()
+
+	err := os.MkdirAll(path, 0755)
+	if err != nil {
+		h.TB.Fatalf("mkdir %q: %v", path, err)
+	}
 }
 
 func (h Helper) WriteFile(filename string, data []byte) {
