@@ -82,7 +82,7 @@ func (h Helper) MkdirTemp() string {
 func (h Helper) WriteFile(filename string, data []byte) {
 	h.TB.Helper()
 
-	err := ioutil.WriteFile("file1", []byte{}, 0644)
+	err := ioutil.WriteFile(filename, []byte{}, 0644)
 	if err != nil {
 		h.TB.Fatalf("writing file to %q: %v", filename, err)
 	}
