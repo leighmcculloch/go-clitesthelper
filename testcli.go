@@ -78,6 +78,7 @@ func Mkdir(t testing.TB, path string) {
 	if err != nil {
 		t.Fatalf("mkdir %q: %v", path, err)
 	}
+	t.Log("mkdir -p " + path)
 }
 
 func WriteFile(t testing.TB, filename string, data []byte) {
@@ -87,4 +88,5 @@ func WriteFile(t testing.TB, filename string, data []byte) {
 	if err != nil {
 		t.Fatalf("writing file to %q: %v", filename, err)
 	}
+	t.Logf("wrote %d bytes to file %s", len(data), filename)
 }
